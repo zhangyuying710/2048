@@ -22,7 +22,7 @@ class Game2048:
         self.add_new_tile()
         self.update_ui()
 
-        # 绑定鼠标事件
+        # Привязка событий мыши
         self.window.bind("<Button-1>", self.mouse_down)
         self.window.bind("<B1-Motion>", self.mouse_move)
         self.window.bind("<ButtonRelease-1>", self.mouse_up)
@@ -32,7 +32,7 @@ class Game2048:
         self.window.mainloop()
 
     def init_ui(self):
-        """初始化UI界面"""
+        """Инициализация пользовательского интерфейса"""
         self.tiles = []
         self.score_label = tk.Label(
             self.window, text=f"Score: {self.score}", font=("Helvetica", 18, "bold"),
@@ -52,7 +52,7 @@ class Game2048:
             self.tiles.append(row)
 
     def update_ui(self):
-        """更新UI"""
+        """Обновленный пользовательский интерфейс"""
         self.score_label.config(text=f"Score: {self.score}")
         for i in range(self.board_size):
             for j in range(self.board_size):
@@ -64,7 +64,7 @@ class Game2048:
                 )
 
     def add_new_tile(self):
-        """随机在空白处添加新的2或4"""
+        """Случайно добавьте новые 2 или 4 в пустые места"""
         empty_cells = [(i, j) for i in range(self.board_size) for j in range(self.board_size) if self.board[i][j] == 0]
         if not empty_cells:
             return
@@ -72,7 +72,7 @@ class Game2048:
         self.board[i][j] = 2 if random.random() < 0.9 else 4
 
     def slide_row_left(self, row):
-        """向左滑动并合并行"""
+        """Проведите пальцем влево и объедините строки"""
         new_row = [i for i in row if i != 0]
         for i in range(len(new_row) - 1):
             if new_row[i] == new_row[i + 1]:
@@ -115,7 +115,7 @@ class Game2048:
         return [list(row) for row in zip(*matrix)]
 
     def check_game_over(self):
-        """检查游戏是否结束"""
+        """Проверьте, закончилась ли игра"""
         for i in range(self.board_size):
             for j in range(self.board_size):
                 if self.board[i][j] == 0:
